@@ -1,0 +1,17 @@
+{
+  "name": "mf-mixing-experiments",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "workspaces": [
+    "vite",
+    "webpack",
+    "rspack"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

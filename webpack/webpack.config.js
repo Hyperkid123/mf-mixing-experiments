@@ -1,4 +1,21 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { ModuleFederationPlugin } = require('@module-federation/enhanced');
+
+const MFPlugin = new ModuleFederationPlugin({
+  name: 'WebpackApp',
+  filename: 'webpack-entry.js',
+  library: {
+    type: 'global',
+    name: 'WebpackApp',
+  },
+  exposes: {
+    './WebpackCounter': './src/exposedModules/counter.js',
+  },
+  shared: {
+    react: { singleton: true },
+    'react-dom': { singleton: true },
+  },
+});
 
 const htmlPlugin = new HtmlWebpackPlugin({
   template: './index.html',
@@ -25,7 +42,7 @@ module.exports = {
       },
     ],
   },
-  plugins: [htmlPlugin],
+  plugins: [htmlPlugin, MFPlugin],
   devServer: {
     port: 8001,
   },

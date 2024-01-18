@@ -9,13 +9,18 @@ const MFPlugin = federation({
   exposes: {
     './ViteCounter': './src/exposedModules/Counter.tsx',
   },
+  remoteType: 'global',
   shared: [
     {
       react: {
-        import: false,
+        // @ts-ignore
+        singleton: true,
+        requiredVersion: '>=17.0.2',
       },
       'react-dom': {
-        import: false,
+        // @ts-ignore
+        singleton: true,
+        requiredVersion: '>=17.0.2',
       },
     },
   ],
@@ -26,5 +31,5 @@ export default defineConfig({
   build: {
     target: 'esnext',
   },
-  plugins: [react(), MFPlugin],
+  plugins: [react() ],
 });

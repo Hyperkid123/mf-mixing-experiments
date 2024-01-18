@@ -12,8 +12,14 @@ const MFPlugin = new ModuleFederationPlugin({
     './WebpackCounter': './src/exposedModules/counter.js',
   },
   shared: {
-    react: { singleton: true },
-    'react-dom': { singleton: true },
+    react: {
+      singleton: true,
+      requiredVersion: '>=17.0.0',
+    },
+    'react-dom': {
+      singleton: true,
+      requiredVersion: '>=17.0.0',
+    },
   },
 });
 
@@ -23,6 +29,7 @@ const htmlPlugin = new HtmlWebpackPlugin({
 
 /** @type { import("webpack").Configuration } */
 module.exports = {
+  devtool: false,
   module: {
     rules: [
       {

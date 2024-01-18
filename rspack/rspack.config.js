@@ -35,7 +35,8 @@ module.exports = {
     },
   },
   output: {
-    publicPath: '/',
+    // remote public must be either auto or the full path with origin
+    publicPath: 'auto',
   },
   devServer: {
     hot: true,

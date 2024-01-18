@@ -10,15 +10,7 @@ const AsyncComponent = ({
   module: string;
 }) => {
   const Component = useMemo(
-    () =>
-      lazy(() =>
-        loadRemote(`${remote}/${module}`, {
-          resolveShare: (...args: any[]) => {
-            console.log('resolveShare', args);
-            return args;
-          },
-        }),
-      ),
+    () => lazy(() => loadRemote(`${remote}/${module}`) as Promise<any>),
     [remote, module],
   );
   return (

@@ -19,14 +19,15 @@ const viteHost = __FEDERATION__.__INSTANCES__.find(
   (host) => host.name === 'ViteApp',
 );
 
-if (!viteHost.shareScopeMap.default) {
-  viteHost.shareScopeMap.default = {};
+if (!viteHost!.shareScopeMap.default) {
+  viteHost!.shareScopeMap.default = {};
 }
 
-viteHost.shareScopeMap.default.react = {
+viteHost!.shareScopeMap.default.react = {
   '18.2.0': {
     deps: [],
     from: 'ViteApp',
+    // @ts-ignore
     get: () => React,
     lib: () => React,
     loaded: true,
@@ -44,10 +45,11 @@ viteHost.shareScopeMap.default.react = {
   },
 };
 
-viteHost.shareScopeMap.default['react-dom'] = {
+viteHost!.shareScopeMap.default['react-dom'] = {
   '18.2.0': {
     deps: [],
     from: 'ViteApp',
+    // @ts-ignore
     get: () => ReactDom,
     lib: () => ReactDom,
     loaded: true,

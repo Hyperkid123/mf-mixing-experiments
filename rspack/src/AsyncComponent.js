@@ -1,4 +1,4 @@
-import { loadRemote } from '@module-federation/runtime-tools/.';
+import { loadRemote } from '@module-federation/runtime-tools';
 import React, { Suspense, lazy, useMemo } from 'react';
 
 const AsyncComponent = ({ remote, module }) => {

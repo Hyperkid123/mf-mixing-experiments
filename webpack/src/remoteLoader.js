@@ -8,6 +8,10 @@ export const initRemoteEntries = async () => {
         name: 'RspackApp',
         entry: 'http://localhost:8080/rspack-entry.js',
       },
+      {
+        name: 'ViteApp',
+        entry: 'http://localhost:5173/assets/vite-entry.js',
+      },
     ],
   });
 };

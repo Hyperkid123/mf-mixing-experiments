@@ -1,7 +1,8 @@
 import React from 'react';
+import Counter from './exposedModules/counter';
 
 function App() {
-  return <div>There will be dragons</div>;
+  return <Counter />;
 }
 
 export default App;

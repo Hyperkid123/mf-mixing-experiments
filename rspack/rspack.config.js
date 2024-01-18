@@ -20,10 +20,6 @@ const MFPlugin = new rspack.container.ModuleFederationPlugin({
       singleton: true,
       requiredVersion: '>=17.0.0',
     },
-    '@module-federation/enhanced': {
-      singleton: true,
-      requiredVersion: '>=0.0.1',
-    },
   },
   exposes: {
     './RspackCounter': './src/exposedModules/counter.js',

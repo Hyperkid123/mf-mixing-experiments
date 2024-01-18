@@ -1,20 +1,19 @@
-const rspack = require("@rspack/core");
+const rspack = require('@rspack/core');
 
 const HTMLPlugin = new rspack.HtmlRspackPlugin({
   template: './index.html',
-})
-
+});
 
 /** @type { import("rspack").Configuration } */
 module.exports = {
-  mode: "development",
+  mode: 'development',
   entry: {
     main: {
-      import: ["./src/index.js"],
+      import: ['./src/index.js'],
     },
   },
   output: {
-    publicPath: "/",
+    publicPath: '/',
   },
   devServer: {
     hot: true,

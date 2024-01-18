@@ -4,11 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "rspack serve -c ./rspack.config.js",
+    "build": "rspack build -c ./rspack.config.js"
   },
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
   "devDependencies": {
-    "@rspack/cli": "^0.5.1"
+    "@rspack/cli": "^0.5.1",
+    "@rspack/core": "^0.5.1",
+    "@rspack/dev-server": "^0.5.1",
+    "react-refresh": "0.14.0"
   }
 }

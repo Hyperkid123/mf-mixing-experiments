@@ -10,8 +10,8 @@ export const initRemoteEntries = async () => {
         entry: 'http://localhost:8001/webpack-entry.js',
       },
       {
-        name: 'ViteApp',
-        entry: 'http://localhost:5173/assets/vite-entry.js',
+        name: 'WebpackNativeApp',
+        entry: 'http://localhost:8002/webpack-native-entry.js',
       },
     ],
   });

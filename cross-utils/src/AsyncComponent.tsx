@@ -50,7 +50,7 @@ const loadViteModule = async (remote: string, module: string) => {
   if (!globalThis.__federation__) {
     throw new Error('Vite dynamic module federation was not initialized!');
   }
-  await globalThis.__federation__.ensure(remote);
+  await globalThis.__federation__.ensure(remote, `./${module}`);
   if (
     !globalThis.__federation__.remotesMap[remote] ||
     !globalThis.__federation__.remotesMap[remote]?.loaded ||

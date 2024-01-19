@@ -6,7 +6,7 @@ export type ViteRemotesMap = {
 
 export type ViteFederation = {
   // init the remote
-  ensure: (remoteId: string) => Promise<any>;
+  ensure: (remoteId: string, module: string) => Promise<any>;
   remotesMap: ViteRemotesMap;
   shareScope: ViteShareScope;
 };
@@ -46,7 +46,7 @@ export const initializeViteFederation = (
     }
   }
 
-  const ensure = async (remoteId: string) => {
+  const ensure = async (remoteId: string, module: string) => {
     const remote = internalRemotesMap[remoteId];
     if (!remote.loaded) {
       if (importTypes.includes(remote.format)) {
@@ -63,7 +63,7 @@ export const initializeViteFederation = (
               if (remote.lib) {
                 remote.lib.init(viteShareScope);
                 remote.loaded = true;
-                remote.lib.get('./ViteCounter').then((m) => {
+                remote.lib.get(module).then((m) => {
                   return m;
                 });
               }
@@ -73,7 +73,7 @@ export const initializeViteFederation = (
         });
       }
     } else {
-      return remote.lib;
+      return remote.lib?.get(module);
     }
   };
 

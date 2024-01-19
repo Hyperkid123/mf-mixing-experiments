@@ -15,7 +15,10 @@ function App() {
       <div>
         <Counter />
       </div>
-      <div>
+      <AsyncComponent remote="CollectionRspackApp" module="Input" />
+      <AsyncComponent remote="CollectionWebpack" module="Input" />
+      <AsyncComponent remote="CollectionViteApp" module="Input" />
+      {/* <div>
         <AsyncComponent remote="WebpackApp" module="WebpackCounter" />
       </div>
       <div>
@@ -26,7 +29,7 @@ function App() {
       </div>
       <div>
         <AsyncComponent remote="ViteApp" module="ViteCounter" />
-      </div>
+      </div> */}
     </div>
   );
 }

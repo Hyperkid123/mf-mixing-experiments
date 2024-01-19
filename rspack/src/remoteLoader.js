@@ -5,6 +5,20 @@ export const initRemoteEntries = () => {
     shareConfig: {},
     remotes: [
       {
+        name: 'CollectionRspackApp',
+        entry: 'http://localhost:8888/rspack/collection-rspack-entry.js',
+      },
+      {
+        name: 'CollectionWebpack',
+        entry: 'http://localhost:8888/webpack/collection-webpack-entry.js',
+      },
+      {
+        name: 'CollectionViteApp',
+        remoteType: RemoteTypes.Vite,
+        url: 'http://localhost:8888/vite/assets/collection-vite-entry.js',
+        format: 'esm',
+      },
+      {
         name: 'WebpackApp',
         entry: 'http://localhost:8001/webpack-entry.js',
         remoteType: RemoteTypes.Webpack,

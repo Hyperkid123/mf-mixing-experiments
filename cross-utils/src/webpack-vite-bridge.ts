@@ -52,6 +52,7 @@ export const initializeViteFederation = (
       if (importTypes.includes(remote.format)) {
         // loading js with import(...)
         return new Promise((resolve) => {
+          // the ignore comments are necessary to stop the bundler from trying to reach local dependencies/modules
           return import(
             /* @vite-ignore */
             /* webpackIgnore: true */

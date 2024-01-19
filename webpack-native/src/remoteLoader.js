@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { initWebpackHost } from 'cross-utils';
+import { RemoteTypes, initWebpackHost } from 'cross-utils';
 
 export const initRemoteEntries = () => {
   return initWebpackHost({
@@ -25,6 +25,13 @@ export const initRemoteEntries = () => {
       {
         name: 'WebpackApp',
         entry: 'http://localhost:8001/webpack-entry.js',
+        remoteType: RemoteTypes.Webpack,
+      },
+      {
+        name: 'ViteApp',
+        remoteType: RemoteTypes.Vite,
+        url: 'http://localhost:5173/assets/vite-entry.js',
+        format: 'esm',
       },
     ],
   });

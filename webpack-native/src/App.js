@@ -1,7 +1,7 @@
 import React from 'react';
 import Counter from './exposedModules/counter';
 import { initRemoteEntries } from './remoteLoader';
-import AsyncComponent from './AsyncComponent';
+import { AsyncComponent } from 'cross-utils';
 
 initRemoteEntries();
 

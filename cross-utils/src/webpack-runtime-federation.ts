@@ -1,5 +1,10 @@
 import { init } from '@module-federation/runtime';
-import { RemoteTypes } from './types';
+import { Remote } from '@module-federation/runtime/types';
+import { RemoteTypes, ViteRemote } from './types';
+import {
+  ViteRemotesMap,
+  initializeViteFederation,
+} from './webpack-vite-bridge';
 
 type InitOptions = Parameters<typeof init>[0];
 
@@ -13,14 +18,25 @@ export type ShareConfig = {
   [dependencyName: string]: ShareConfigEntry;
 };
 
+export type CrossRemoteConfig =
+  | ({
+      remoteType: RemoteTypes.Vite;
+      name: string;
+    } & ViteRemote)
+  | ({
+      remoteType?: RemoteTypes.Webpack;
+    } & Remote);
+
 export type CreateFederationHostConfig = InitOptions & {
   shareConfig?: ShareConfig;
   hostType?: RemoteTypes;
+  remotes: Remote[];
 };
 
 export function createFederationOptions({
   shareConfig = {},
   hostType = RemoteTypes.Webpack,
+  remotes,
   ...userOptions
 }: CreateFederationHostConfig): InitOptions {
   const federationShare = Object.entries<any>(shareConfig).reduce(
@@ -40,6 +56,7 @@ export function createFederationOptions({
   const options: InitOptions = {
     ...userOptions,
     shared: federationShare,
+    remotes,
   };
   return options;
 }
@@ -95,10 +112,33 @@ function bridgeViteHostShareScope(name: string, shareConfig: ShareConfig = {}) {
   }
 }
 
-export function initWebpackHost(options: CreateFederationHostConfig) {
-  const host = init(createFederationOptions(options));
+export function initWebpackHost({
+  remotes,
+  ...options
+}: Omit<CreateFederationHostConfig, 'remotes'> & {
+  remotes: CrossRemoteConfig[];
+}) {
+  const webpackRemotes: Remote[] = [];
+  const viteRemotes: ViteRemotesMap = {};
+  for (const remote of remotes) {
+    if (remote.remoteType === RemoteTypes.Vite) {
+      viteRemotes[remote.name] = {
+        url: remote.url,
+        format: remote.format,
+        loaded: remote.loaded,
+      };
+    } else {
+      webpackRemotes.push(remote as Remote);
+    }
+  }
+  console.log({ webpackRemotes, viteRemotes });
+  const host = init(
+    createFederationOptions({ remotes: webpackRemotes, ...options }),
+  );
   if (options.hostType === RemoteTypes.Vite) {
     bridgeViteHostShareScope(options.name, options.shareConfig);
   }
+
+  initializeViteFederation(options.name, 'default', viteRemotes);
   return host;
 }

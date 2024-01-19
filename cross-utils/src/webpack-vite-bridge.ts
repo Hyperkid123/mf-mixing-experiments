@@ -1,24 +1,4 @@
-import '@module-federation/runtime/types';
-
-export type ViteShareScope = {
-  [pkgName: string]: {
-    [version: string]: {
-      get: () => () => any | undefined;
-      metaGet: () => () => any | undefined;
-      loaded: 0 | 1;
-    };
-  };
-};
-
-export type ViteRemote = {
-  url: string;
-  format: 'esm'; // add more based on VITE API
-  loaded?: boolean;
-  lib?: {
-    init: (shareScope: ViteShareScope) => void;
-    get: (moduleName: string) => Promise<() => any>;
-  };
-};
+import { ViteRemote, ViteShareScope } from './types';
 
 export type ViteRemotesMap = {
   [remoteName: string]: ViteRemote;

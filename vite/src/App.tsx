@@ -19,6 +19,15 @@ function App() {
       <div>
         <AsyncComponent remote="RspackApp" module="RspackCounter" />
       </div>
+      <div>
+        <AsyncComponent remote="WebpackApp" module="WebpackCounter" />
+      </div>
+      <div>
+        <AsyncComponent
+          remote="WebpackNativeApp"
+          module="WebpackNativeCounter"
+        />
+      </div>
     </div>
   );
 }

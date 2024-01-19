@@ -23,6 +23,14 @@ export const initRemoteEntries = async () => {
         name: 'RspackApp',
         entry: 'http://localhost:8080/rspack-entry.js',
       },
+      {
+        name: 'WebpackApp',
+        entry: 'http://localhost:8001/webpack-entry.js',
+      },
+      {
+        name: 'WebpackNativeApp',
+        entry: 'http://localhost:8002/webpack-native-entry.js',
+      },
     ],
   });
 };

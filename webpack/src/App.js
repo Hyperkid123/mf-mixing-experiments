@@ -1,7 +1,7 @@
 import React from 'react';
 import Counter from './exposedModules/counter';
 import { initRemoteEntries } from './remoteLoader';
-import AsyncComponent from './AsyncComponent';
+import { AsyncComponent } from 'cross-utils';
 
 initRemoteEntries();
 
@@ -13,6 +13,15 @@ function App() {
       </div>
       <div>
         <AsyncComponent remote="RspackApp" module="RspackCounter" />
+      </div>
+      <div>
+        <AsyncComponent
+          remote="WebpackNativeApp"
+          module="WebpackNativeCounter"
+        />
+      </div>
+      <div>
+        <AsyncComponent remote="ViteApp" module="ViteCounter" />
       </div>
     </div>
   );

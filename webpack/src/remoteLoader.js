@@ -1,7 +1,7 @@
-import { init } from '@module-federation/runtime';
+import { RemoteTypes, initWebpackHost } from 'cross-utils';
 
-export const initRemoteEntries = async () => {
-  init({
+export const initRemoteEntries = () => {
+  return initWebpackHost({
     name: 'WebpackApp',
     remotes: [
       {
@@ -9,8 +9,15 @@ export const initRemoteEntries = async () => {
         entry: 'http://localhost:8080/rspack-entry.js',
       },
       {
+        name: 'WebpackNativeApp',
+        entry: 'http://localhost:8002/webpack-native-entry.js',
+        remoteType: RemoteTypes.Webpack,
+      },
+      {
         name: 'ViteApp',
-        entry: 'http://localhost:5173/assets/vite-entry.js',
+        remoteType: RemoteTypes.Vite,
+        url: 'http://localhost:5173/assets/vite-entry.js',
+        format: 'esm',
       },
     ],
   });

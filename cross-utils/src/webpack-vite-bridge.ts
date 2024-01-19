@@ -52,7 +52,11 @@ export const initializeViteFederation = (
       if (importTypes.includes(remote.format)) {
         // loading js with import(...)
         return new Promise((resolve) => {
-          return import(/* @vite-ignore */ remote.url).then((lib) => {
+          return import(
+            /* @vite-ignore */
+            /* webpackIgnore: true */
+            remote.url
+          ).then((lib) => {
             if (!remote.loaded) {
               remote.lib = lib;
               if (remote.lib) {

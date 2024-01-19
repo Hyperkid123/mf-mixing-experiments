@@ -52,5 +52,10 @@ module.exports = {
   plugins: [htmlPlugin, MFPlugin],
   devServer: {
     port: 8001,
+    client: {
+      overlay: {
+        warnings: false,
+      },
+    },
   },
 };

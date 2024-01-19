@@ -1,10 +1,9 @@
-import { init } from '@module-federation/runtime';
 import React from 'react';
 import ReactDom from 'react-dom';
-import { createFederationOptions } from 'cross-utils';
+import { initWebpackHost } from 'cross-utils';
 
-export const initRemoteEntries = async () => {
-  const options = createFederationOptions({
+export const initRemoteEntries = () => {
+  return initWebpackHost({
     name: 'WebpackNativeApp',
     shareConfig: {
       react: {
@@ -29,5 +28,4 @@ export const initRemoteEntries = async () => {
       },
     ],
   });
-  init(options);
 };

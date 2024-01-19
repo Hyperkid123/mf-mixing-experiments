@@ -1,9 +1,9 @@
-import { init } from '@module-federation/runtime-tools';
-import 'systemjs';
+import { createFederationOptions, initWebpackHost } from 'cross-utils';
 
-export const initRemoteEntries = async () => {
-  init({
+export const initRemoteEntries = () => {
+  const options = createFederationOptions({
     name: 'RspackApp',
+    shareConfig: {},
     remotes: [
       {
         name: 'WebpackApp',
@@ -15,4 +15,5 @@ export const initRemoteEntries = async () => {
       },
     ],
   });
+  initWebpackHost(options);
 };

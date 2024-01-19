@@ -1,5 +1,4 @@
-// @ts-ignore
-import { loadRemote } from '@module-federation/runtime-tools';
+import { loadRemote } from '@module-federation/runtime';
 import { Suspense, lazy, useMemo } from 'react';
 
 const AsyncComponent = ({

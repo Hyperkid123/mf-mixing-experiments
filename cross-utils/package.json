@@ -1,0 +1,20 @@
+{
+  "name": "cross-utils",
+  "version": "1.0.0",
+  "description": "",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --module esnext --target es5"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@module-federation/runtime": "^0.0.9",
+    "npm": "^10.3.0",
+    "react": "^18.2.0"
+  }
+}

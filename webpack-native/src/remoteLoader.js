@@ -1,26 +1,21 @@
-import { init } from '@module-federation/runtime-tools';
+import { init } from '@module-federation/runtime';
 import React from 'react';
 import ReactDom from 'react-dom';
+import { createFederationOptions } from 'cross-utils';
 
 export const initRemoteEntries = async () => {
-  init({
+  const options = createFederationOptions({
     name: 'WebpackNativeApp',
-    shared: {
+    shareConfig: {
       react: {
         version: '18.2.0',
-        lib: () => React,
-        shareConfig: {
-          singleton: true,
-          requiredVersion: '>=17.0.2',
-        },
+        package: React,
+        singleton: true,
       },
       'react-dom': {
         version: '18.2.0',
-        shareConfig: {
-          singleton: true,
-          requiredVersion: '>=17.0.2',
-        },
-        lib: () => ReactDom,
+        package: ReactDom,
+        singleton: true,
       },
     },
     remotes: [
@@ -34,4 +29,5 @@ export const initRemoteEntries = async () => {
       },
     ],
   });
+  init(options);
 };

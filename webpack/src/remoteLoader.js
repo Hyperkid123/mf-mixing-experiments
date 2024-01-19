@@ -1,4 +1,4 @@
-import { init } from '@module-federation/runtime-tools';
+import { init } from '@module-federation/runtime';
 
 export const initRemoteEntries = async () => {
   init({

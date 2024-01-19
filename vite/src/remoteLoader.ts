@@ -1,30 +1,22 @@
-// @ts-ignore
-import { init } from '@module-federation/runtime-tools';
 import React from 'react';
 import ReactDom from 'react-dom';
+import { initWebpackHost } from 'cross-utils';
 
 export const initRemoteEntries = async () => {
-  init({
+  return initWebpackHost({
     name: 'ViteApp',
-    shared: {
+    shareConfig: {
       react: {
         version: '18.2.0',
-        lib: () => React,
-        shareConfig: {
-          singleton: true,
-          requiredVersion: '>=17.0.2',
-        },
+        package: React,
+        singleton: true,
       },
       'react-dom': {
         version: '18.2.0',
-        shareConfig: {
-          singleton: true,
-          requiredVersion: '>=17.0.2',
-        },
-        lib: () => ReactDom,
+        package: ReactDom,
+        singleton: true,
       },
     },
-
     remotes: [
       {
         name: 'RspackApp',

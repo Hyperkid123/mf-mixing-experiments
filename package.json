@@ -6,7 +6,9 @@
   "workspaces": [
     "vite",
     "webpack",
-    "rspack"
+    "rspack",
+    "webpack-native",
+    "cross-utils"
   ],
   "main": "index.js",
   "scripts": {

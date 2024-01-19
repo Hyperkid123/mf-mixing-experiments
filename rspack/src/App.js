@@ -1,13 +1,19 @@
 import React from 'react';
 import Counter from './exposedModules/counter';
 import { initRemoteEntries } from './remoteLoader';
-import AsyncComponent from './AsyncComponent';
 
-import './viteRemoteLoader';
-import AsyncViteComponent from './AsyncViteComponent';
+import { initializeViteFederation, AsyncComponent } from 'cross-utils';
+
+// import './viteRemoteLoader';
+// import AsyncViteComponent from './AsyncViteComponent';
 
 // Initialize remote containers before rendering
 initRemoteEntries();
+
+const remotesMap = {
+  ViteApp: { url: 'http://localhost:5173/assets/vite-entry.js', format: 'esm' },
+};
+initializeViteFederation('RspackApp', 'default', remotesMap);
 
 /* eslint-enable no-undef */
 
@@ -27,7 +33,7 @@ function App() {
         />
       </div>
       <div>
-        <AsyncViteComponent />
+        <AsyncComponent remote="ViteApp" module="ViteCounter" />
       </div>
     </div>
   );

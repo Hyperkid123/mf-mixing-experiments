@@ -1,16 +1,12 @@
 import React, { Suspense, lazy, useMemo } from 'react';
 import '@module-federation/runtime/types';
 import { loadRemote } from '@module-federation/runtime';
+import { RemoteTypes } from './types';
 
 export type AsyncComponentProps = {
   remote: string;
   module: string;
 };
-
-export enum RemoteTypes {
-  Webpack = 'Webpack',
-  Vite = 'Vite',
-}
 
 function resolveRemoteType(remote: string): RemoteTypes {
   const isWebpack = globalThis?.__FEDERATION__?.__INSTANCES__.find(

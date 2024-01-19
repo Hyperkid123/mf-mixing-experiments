@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { initWebpackHost } from 'cross-utils';
+import { initWebpackHost, RemoteTypes } from 'cross-utils';
 
 export const initRemoteEntries = async () => {
   return initWebpackHost({
     name: 'ViteApp',
+    hostType: RemoteTypes.Vite,
     shareConfig: {
       react: {
         version: '18.2.0',

@@ -39,6 +39,9 @@ module.exports = {
     publicPath: 'auto',
   },
   devServer: {
+    client: {
+      overlay: false,
+    },
     hot: true,
   },
   module: {

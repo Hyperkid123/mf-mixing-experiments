@@ -18,7 +18,10 @@ function App() {
       <AsyncComponent remote="CollectionRspackApp" module="Input" />
       <AsyncComponent remote="CollectionWebpack" module="Input" />
       <AsyncComponent remote="CollectionViteApp" module="Input" />
-      {/* <div>
+      <h2>
+        Examples bellow require running dev servers for each of the shell aps.
+      </h2>
+      <div>
         <AsyncComponent remote="WebpackApp" module="WebpackCounter" />
       </div>
       <div>
@@ -29,7 +32,7 @@ function App() {
       </div>
       <div>
         <AsyncComponent remote="ViteApp" module="ViteCounter" />
-      </div> */}
+      </div>
     </div>
   );
 }

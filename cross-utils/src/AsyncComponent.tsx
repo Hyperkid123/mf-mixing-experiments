@@ -20,9 +20,7 @@ const AsyncComponent = ({ remote, module }: AsyncComponentProps) => {
   );
 };
 
-type ErrorBoundaryProps = {
-  children: React.ReactNode;
-};
+type ErrorBoundaryProps = AsyncComponentProps;
 
 type ErrorBoundaryState = {
   hasError: boolean;

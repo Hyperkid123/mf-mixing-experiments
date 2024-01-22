@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import federation from '@originjs/vite-plugin-federation';
 import topLevelAwait from 'vite-plugin-top-level-await';
+import devManifest from 'vite-plugin-dev-manifest';
 
 const MFPlugin = federation({
   // base: 'http://localhost:5173',
@@ -30,7 +31,11 @@ const MFPlugin = federation({
 
 export default defineConfig({
   build: {
+    manifest: true,
     minify: false,
+    // rollupOptions: {
+    //   input: 'src/main.tsx',
+    // },
   },
   plugins: [
     react(),
@@ -41,5 +46,6 @@ export default defineConfig({
       // The function to generate import names of top-level await promise in each chunk module
       promiseImportName: (i) => `__tla_${i}`,
     }),
+    devManifest(),
   ],
 });

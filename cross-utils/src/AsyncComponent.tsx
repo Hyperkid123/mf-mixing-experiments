@@ -1,93 +1,60 @@
-import React, { Suspense, lazy, useMemo } from 'react';
+import React, { ErrorInfo, Suspense, lazy, useMemo } from 'react';
 import '@module-federation/runtime/types';
-import { loadRemote } from '@module-federation/runtime';
-import { RemoteTypes } from './types';
+import loadModule from './loadModule';
 
-export type AsyncComponentProps = {
+export type AsyncComponentProps = React.PropsWithChildren<{
   remote: string;
   module: string;
-};
-
-function resolveRemoteType(remote: string): RemoteTypes {
-  const isWebpack = globalThis?.__FEDERATION__?.__INSTANCES__.find(
-    (instance) => instance.name === remote,
-  );
-  if (isWebpack) {
-    return RemoteTypes.Webpack;
-  }
-
-  const isVite = Object.prototype.hasOwnProperty.call(
-    globalThis?.__federation__?.remotesMap ?? {},
-    remote,
-  );
-
-  if (isVite) {
-    return RemoteTypes.Vite;
-  }
-
-  return RemoteTypes.Webpack;
-}
-
-const WebpackWrapper = ({ remote, module }: AsyncComponentProps) => {
-  const Component = useMemo(
-    () =>
-      lazy(
-        () =>
-          loadRemote(`${remote}/${module}`) as Promise<{
-            default: React.ComponentType;
-          }>,
-      ),
-    [remote, module],
-  );
-  return (
-    <Suspense fallback={<div>Loading</div>}>
-      <Component />
-    </Suspense>
-  );
-};
-
-const loadViteModule = async (remote: string, module: string) => {
-  if (!globalThis.__federation__) {
-    throw new Error('Vite dynamic module federation was not initialized!');
-  }
-  await globalThis.__federation__.ensure(remote, `./${module}`);
-  if (
-    !globalThis.__federation__.remotesMap[remote] ||
-    !globalThis.__federation__.remotesMap[remote]?.loaded ||
-    !globalThis.__federation__.remotesMap[remote].lib
-  ) {
-    throw new Error(
-      `Trying to access Vite remote ${remote} before initialization.`,
-    );
-  }
-
-  const c = await globalThis.__federation__.remotesMap[remote].lib!.get(
-    `./${module}`,
-  );
-  return c();
-};
-
-const ViteWrapper = ({ remote, module }: AsyncComponentProps) => {
-  const Component = useMemo(
-    () => lazy(() => loadViteModule(remote, module)),
-    [remote, module],
-  );
-  return (
-    <Suspense fallback={<div>Loading</div>}>
-      <Component />
-    </Suspense>
-  );
-};
+}>;
 
 const AsyncComponent = ({ remote, module }: AsyncComponentProps) => {
-  const remoteType = resolveRemoteType(remote);
-  if (remoteType === RemoteTypes.Webpack) {
-    return <WebpackWrapper remote={remote} module={module} />;
-  } else if (remoteType === RemoteTypes.Vite) {
-    return <ViteWrapper remote={remote} module={module} />;
-  }
+  const Component = useMemo(
+    () => lazy(() => loadModule(remote, module)),
+    [remote, module],
+  );
 
-  return null;
+  return (
+    <Suspense fallback={<div>Loading</div>}>
+      <Component />
+    </Suspense>
+  );
 };
 
-export default AsyncComponent;
+type ErrorBoundaryProps = {
+  children: React.ReactNode;
+};
+
+type ErrorBoundaryState = {
+  hasError: boolean;
+};
+
+class ErrorBoundary extends React.Component<
+  ErrorBoundaryProps,
+  ErrorBoundaryState
+> {
+  constructor(props: ErrorBoundaryProps) {
+    super(props);
+    this.state = {
+      hasError: false,
+    };
+  }
+
+  static getDerivedStateFromError(): ErrorBoundaryState {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error('Error caught in ErrorBoundary:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <div>Error occurred. Please try again.</div>;
+    }
+    const props = this.props as AsyncComponentProps;
+
+    return <AsyncComponent {...props} />;
+  }
+}
+
+export default ErrorBoundary;

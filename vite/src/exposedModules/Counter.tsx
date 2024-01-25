@@ -1,4 +1,7 @@
 import React from 'react';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
 
 const Counter = () => {
   const [count, setCount] = React.useState(0);
@@ -6,13 +9,14 @@ const Counter = () => {
     <div>
       <h1>Vite Counter</h1>
       <div>
-        <button onClick={() => setCount((count) => count + 1)}>Add</button>
+        <Button onClick={() => setCount((count) => count + 1)}>Add</Button>
       </div>
       <div>
-        <p>
+        <Typography>
           <strong>Count:</strong> {count}
-        </p>
+        </Typography>
       </div>
+      <Divider />
     </div>
   );
 };

@@ -27,7 +27,10 @@
     "vite-plugin-top-level-await": "^1.4.1"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
     "@module-federation/runtime": "^0.0.9",
+    "@mui/material": "^5.15.6",
     "cross-utils": "^1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

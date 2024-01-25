@@ -24,6 +24,28 @@ const MFPlugin = new rspack.container.ModuleFederationPlugin({
       singleton: true,
       requiredVersion: '>=1.0.0',
     },
+    '@mui/material/Button': {
+      requiredVersion: '>=5.0.0',
+      version: '5.15.6',
+    },
+    '@mui/material/TextField': {
+      requiredVersion: '>=5.0.0',
+      version: '5.15.6',
+    },
+    '@mui/material/Typography': {
+      requiredVersion: '>=5.0.0',
+      version: '5.15.6',
+    },
+    '@mui/material/Divider': {
+      requiredVersion: '>=5.0.0',
+      version: '5.15.6',
+    },
+    '@emotion/react': {
+      requiredVersion: '>=11.0.0',
+    },
+    '@emotion/styled': {
+      requiredVersion: '>=11.0.0',
+    },
   },
   exposes: {
     './RspackCounter': './src/exposedModules/counter.js',

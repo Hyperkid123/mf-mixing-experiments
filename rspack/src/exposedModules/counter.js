@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '@mui/material/Button';
 
 const Counter = () => {
   const [count, setCount] = React.useState(0);
@@ -6,7 +7,7 @@ const Counter = () => {
     <div>
       <h1>RSPACK Counter</h1>
       <div>
-        <button onClick={() => setCount((count) => count + 1)}>Add</button>
+        <Button onClick={() => setCount((count) => count + 1)}>Add</Button>
       </div>
       <div>
         <p>

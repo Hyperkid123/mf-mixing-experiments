@@ -13,6 +13,7 @@ export type ViteFederation = {
 
 declare global {
   var __federation__: ViteFederation;
+  var __federation_shared__: any 
 }
 
 const importTypes = ['esm'];
@@ -22,6 +23,12 @@ export const initializeViteFederation = (
   shareScopeName: string,
   remotesConfig: ViteRemotesMap,
 ) => {
+  console.log({
+    vf: globalThis.__federation__,
+    fs: globalThis?.__federation_shared__,
+    // @ts-ignore
+    v: window.__federation_shared__
+  });
   const internalRemotesMap = {
     ...remotesConfig,
   };

@@ -1,5 +1,9 @@
 import { useState } from 'react';
 import { useCount, useDecrement, useIncrement } from 'shared-package';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
 
 const StateFullComponent = ({ title }: { title: string }) => {
   const count = useCount();
@@ -8,10 +12,12 @@ const StateFullComponent = ({ title }: { title: string }) => {
   const [value, setValue] = useState('');
   return (
     <div>
-      <h1>{title}</h1>
-      <p>Statefull component</p>
+      <Typography variant="h3" component="h1">
+        {title}
+      </Typography>
+      <Typography>Stateful component</Typography>
       <div>
-        <input
+        <TextField
           placeholder="Type something"
           type="text"
           value={value}
@@ -19,18 +25,26 @@ const StateFullComponent = ({ title }: { title: string }) => {
         />
       </div>
       <div>
-        <p>
-          <strong>Value:</strong> {value}
-        </p>
+        <Typography>
+          <Typography variant="caption" component="strong">
+            Value:
+          </Typography>{' '}
+          {value}
+        </Typography>
       </div>
-      <hr />
+      <Divider />
       <div>
-        <h2>Counter from singleton react context</h2>
-        <p>
-          <strong>Count:</strong> {count}
-        </p>
-        <button onClick={increment}>Increment</button>
-        <button onClick={decrement}>Decrement</button>
+        <Typography component="h2" variant="h4">
+          Counter from singleton react context
+        </Typography>
+        <Typography>
+          <Typography variant="caption" component="strong">
+            Count:
+          </Typography>{' '}
+          {count}
+        </Typography>
+        <Button onClick={increment}>Increment</Button>
+        <Button onClick={decrement}>Decrement</Button>
       </div>
     </div>
   );

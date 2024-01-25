@@ -20,6 +20,10 @@ const MFPlugin = new container.ModuleFederationPlugin({
       singleton: true,
       requiredVersion: '>=17.0.0',
     },
+    'shared-package': {
+      singleton: true,
+      requiredVersion: '>=1.0.0',
+    },
   },
 });
 

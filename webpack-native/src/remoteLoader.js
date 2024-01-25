@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import { RemoteTypes, initWebpackHost } from 'cross-utils';
+import * as SP from 'shared-package';
 
 export const initRemoteEntries = () => {
   return initWebpackHost({
     name: 'WebpackNativeApp',
+    // TODO: automate this to take the packages from the existing shared scope
     shareConfig: {
       react: {
         version: '18.2.0',
@@ -15,6 +17,11 @@ export const initRemoteEntries = () => {
         version: '18.2.0',
         package: ReactDom,
         singleton: true,
+      },
+      'shared-package': {
+        version: '1.0.0',
+        singleton: true,
+        package: SP,
       },
     },
     remotes: [
@@ -31,6 +38,20 @@ export const initRemoteEntries = () => {
         name: 'ViteApp',
         remoteType: RemoteTypes.Vite,
         url: 'http://localhost:5173/assets/vite-entry.js',
+        format: 'esm',
+      },
+      {
+        name: 'CollectionRspackApp',
+        entry: 'http://localhost:8888/rspack/collection-rspack-entry.js',
+      },
+      {
+        name: 'CollectionWebpack',
+        entry: 'http://localhost:8888/webpack/collection-webpack-entry.js',
+      },
+      {
+        name: 'CollectionViteApp',
+        remoteType: RemoteTypes.Vite,
+        url: 'http://localhost:8888/vite/assets/collection-vite-entry.js',
         format: 'esm',
       },
     ],

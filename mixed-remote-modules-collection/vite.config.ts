@@ -24,6 +24,11 @@ const MFPlugin = federation({
         singleton: true,
         requiredVersion: '>=17.0.2',
       },
+      'shared-package': {
+        // @ts-ignore
+        singleton: true,
+        requiredVersion: '>=1.0.0',
+      },
     },
   ],
 });

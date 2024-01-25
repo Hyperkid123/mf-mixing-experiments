@@ -16,6 +16,10 @@ const MFPlugin = new rspack.container.ModuleFederationPlugin({
       singleton: true,
       requiredVersion: '>=17.0.0',
     },
+    'shared-package': {
+      singleton: true,
+      requiredVersion: '>=1.0.0',
+    },
   },
   exposes: {
     './Input': './src/rspack-remote.js',

@@ -1,7 +1,10 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { useCount, useDecrement, useIncrement } from 'shared-package';
 
 const StateFullComponent = ({ title }) => {
+  const count = useCount();
+  const increment = useIncrement();
+  const decrement = useDecrement();
   const [value, setValue] = useState('');
   return (
     <div>
@@ -19,6 +22,15 @@ const StateFullComponent = ({ title }) => {
         <p>
           <strong>Value:</strong> {value}
         </p>
+      </div>
+      <hr />
+      <div>
+        <h2>Counter from singleton react context</h2>
+        <p>
+          <strong>Count:</strong> {count}
+        </p>
+        <button onClick={increment}>Increment</button>
+        <button onClick={decrement}>Decrement</button>
       </div>
     </div>
   );

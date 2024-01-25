@@ -9,7 +9,8 @@
     "rspack",
     "webpack-native",
     "cross-utils",
-    "mixed-remote-modules-collection"
+    "mixed-remote-modules-collection",
+    "shared-package"
   ],
   "main": "index.js",
   "scripts": {

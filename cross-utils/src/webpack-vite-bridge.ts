@@ -26,7 +26,7 @@ export const initializeViteFederation = (
     ...remotesConfig,
   };
   const federationShareScope =
-    global.__FEDERATION__.__SHARE__[baseAppName][shareScopeName];
+    globalThis.__FEDERATION__.__SHARE__[baseAppName][shareScopeName];
 
   const viteShareScope: ViteShareScope = {};
 
@@ -83,6 +83,6 @@ export const initializeViteFederation = (
     shareScope: viteShareScope,
   };
 
-  global.__federation__ = viteApi;
+  globalThis.__federation__ = viteApi;
   return viteApi;
 };
